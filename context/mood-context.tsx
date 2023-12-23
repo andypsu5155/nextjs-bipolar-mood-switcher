@@ -1,8 +1,10 @@
 "use client"
 
 import React, { createContext, useContext, useState } from 'react'
+import { emotions } from '@/lib/data'
 
-type Mood = "happy" | "sad" | "angry";
+
+type Mood = typeof emotions[number]['name'];
 
 type MoodContextType = {
   mood: Mood;
@@ -13,20 +15,16 @@ type MoodContextProviderProps = {
   children: React.ReactNode;
 };
 
-
 const MoodContext = createContext<MoodContextType | null>(null);
 
 export default function MoodContextProvider({children}: MoodContextProviderProps) {
-  const [currentMood, setMood] = useState<Mood>("happy");
+  const emotionNames = emotions.map((emotion) => emotion.name);
+  const [currentMood, setMood] = useState<Mood>(emotionNames[0]);
 
   const toggleMood = () => {
-    if (currentMood === "happy") {
-      setMood("sad");
-    } else if (currentMood === "sad") {
-      setMood("angry");
-    } else {
-      setMood("happy");
-    }
+    const currentMoodIndex = emotionNames.indexOf(currentMood);
+    const nextMoodIndex = (currentMoodIndex + 1) % emotionNames.length;
+    setMood(emotionNames[nextMoodIndex]);
   }
 
   return (
