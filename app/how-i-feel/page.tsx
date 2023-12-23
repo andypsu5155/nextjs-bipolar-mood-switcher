@@ -2,14 +2,18 @@
 
 import React from 'react'
 import { useMoodContext } from '@/context/mood-context'
+import SectionHeading from '@/components/font-styles/section-heading';
+import SectionSubHeading from '@/components/font-styles/section-subheading';
+import SectionParagraph from '@/components/font-styles/section-paragraph';
 
 export default function Page() {
-  const {mood, toggleMood} = useMoodContext();
+  const {mood} = useMoodContext();
 
   return (
     <section className='p-10 text-center'>
-        <h1 className='text-4xl font-bold text-gray-800 leading-[5rem]'>How I Feel:</h1>
-        <p className='text-xl font-semibold text-gray-500 mb-5'>Today I am feeling extremely {mood}!</p>
+        <SectionHeading>How I Feel:</SectionHeading>
+        <SectionSubHeading>Today I am feeling extremely {mood.name}!</SectionSubHeading>
+        <SectionParagraph>{mood.content}</SectionParagraph>
     </section>
   )
 }

@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react'
 import { emotions } from '@/lib/data'
 
 
-type Mood = typeof emotions[number]['name'];
+type Mood = typeof emotions[number];
 
 type MoodContextType = {
   mood: Mood;
@@ -18,13 +18,12 @@ type MoodContextProviderProps = {
 const MoodContext = createContext<MoodContextType | null>(null);
 
 export default function MoodContextProvider({children}: MoodContextProviderProps) {
-  const emotionNames = emotions.map((emotion) => emotion.name);
-  const [currentMood, setMood] = useState<Mood>(emotionNames[0]);
+  const [currentMood, setMood] = useState<Mood>(emotions[0]);
 
   const toggleMood = () => {
-    const currentMoodIndex = emotionNames.indexOf(currentMood);
-    const nextMoodIndex = (currentMoodIndex + 1) % emotionNames.length;
-    setMood(emotionNames[nextMoodIndex]);
+    const currentMoodIndex = emotions.findIndex((emotion) => emotion === currentMood);
+    const nextMoodIndex = (currentMoodIndex + 1) % emotions.length;
+    setMood(emotions[nextMoodIndex]);
   }
 
   return (
