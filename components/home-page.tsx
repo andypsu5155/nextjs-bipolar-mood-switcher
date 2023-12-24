@@ -12,7 +12,7 @@ export default function HomePage() {
     <section className='text-center'>
       <SectionHeading>I am Bi-Polar and can switch my mood with a click of a button!</SectionHeading>
       <SectionSubHeading>Click the button below to switch my mood and play with my emotions!</SectionSubHeading>
-      <button className='bg-blue-500 hover:bg-blue-700 text-white text-8xl font-bold py-[3rem] px-[7rem] rounded capitalize'
+      <button className='bg-blue-500 hover:bg-blue-700 hover:scale-110  text-white text-8xl font-bold py-[3rem] px-[7rem] rounded-3xl capitalize transition-all'
               onClick={toggleMood}>{mood.name}</button>
     </section>
   )
